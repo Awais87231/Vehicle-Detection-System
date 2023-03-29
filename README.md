@@ -4,12 +4,13 @@
 ISE PROJECT DELIEVERABLE # 2
 
 
+
 ## Developed by
 
 - [@ashharamir](https://www.github.com/ashharamir)
 - [@ayshahashmi]
-- [@ayshahashmi]
-- [@ayshahashmi]
+- [@bushrasajid]
+- [@awaisrafique]
 
 
 
