@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, inital-scale=1.0">
+    <link rel="stylesheet" href="todaysData.css">
+    <!-- <style type="text/css" media="screen"></style> -->
+    <title class="titleClass">VEHICLE STATS</title>
+</head>
+
+<body>
+    
+<div class="headerTitle">
+    <p>​​​​ ​​​ ​Vehicle Data<p>
+</div>
+
+<div class="clockDiv">
+    <p id="clock"></p>
+</div>
+
+<div class="userInfo">
+    <div class="dropdown">
+      <img src="C:/Users/Ashar/Documents/NUCES/Study/SEM-2/ISE/PROJECT/Newfolder/assets/defaultpfp.png" alt="pfp" class="image">
+      <button class="dropbtn">Welcome User ▼</button>
+      <div class="dropdown-content">
+        <a href="#" onclick="settings()">Settings</a>
+        <a href="#" onclick="logout()">Logout</a>
+      </div>
+    </div>
+  </div>
+  
+
+<div class="containerA">
+    <div class="c1">
+        <h1>Vehicles Entered Today</h1>
+    </div>
+    <div class="p1">
+        <p id="vehicleCountToday"></p>
+    </div>  
+</div>
+
+<div class="containerB">
+        <div class="c2">
+            <h1>Vehicles Left Today</h1>
+        </div>
+        <div class="p2">
+            <p id="totalVehicleLeftToday"></p>
+        </div>
+</div>
+
+<div class="containerE">
+    <div class="c5">
+        <h1>Vehicles Present</h1>
+    </div>
+    <div class="p5">
+        <p id="vehiclePresent"></p>
+    </div>
+</div>
+
+
+<div class="image-container">
+    <img src="C:/Users/Ashar/Documents/NUCES/Study/SEM-2/ISE/PROJECT/Newfolder/dayXcountYgraph.png" alt="Image" class="image">
+</div>
+
+<div class="buttonNav">
+    <button class="buttonC" onclick="openGlobalData()">VIEW GLOBAL DATA</button>
+</div>
+
+<script>
+    window.onload = function() {
+        fetchFileContent();
+        fetchVehiclesLeft();
+        fetchLowestFreq();
+        fetchHighestFreq();
+        plotGraph();
+        fetchVehiclesPresent();
+    };
+
+    function fetchFileContent() {
+        fetch('http://localhost:5000/renderVehicleCountToday')
+            .then(response => response.text())
+            .then(entry => {
+                document.getElementById('vehicleCountToday').innerText = entry;
+            })
+            .catch(error => console.log(error));
+    }
+    function fetchVehiclesLeft() {
+        fetch('http://localhost:5000/renderVehiclesLeftToday')
+            .then(response => response.text())
+            .then(entry => {
+                document.getElementById('totalVehicleLeftToday').innerText = entry;
+            })
+            .catch(error => console.log(error));
+    }
+    function fetchLowestFreq(){
+        fetch('http://localhost:5000/renderLowestFreq')
+            .then(response => response.text())
+            .then(entry => {
+                document.getElementById('lowestFrequency').innerText = entry;
+            })
+            .catch(error => console.log(error));
+    }
+    function fetchHighestFreq(){
+        fetch('http://localhost:5000/renderHighestFreq')
+            .then(response => response.text())
+            .then(entry => {
+                document.getElementById('highestFrequency').innerText = entry;
+            })
+            .catch(error => console.log(error));
+    }
+    function plotGraph(){
+        fetch('http://localhost:5000/graphAllFiles')
+    }
+    function fetchVehiclesPresent() {
+    Promise.all([ //promise used to fetch simulataneously
+        fetch('http://localhost:5000/renderVehicleCountToday').then(response => response.text()),
+        fetch('http://localhost:5000/renderVehiclesLeftToday').then(response => response.text())
+    ])
+        .then(([countToday, leftToday]) => {
+            console.log(countToday);
+            console.log(leftToday);
+            const vehiclePresent = parseInt(countToday) - parseInt(leftToday);
+            document.getElementById('vehiclePresent').innerText = vehiclePresent;
+        })
+        .catch(error => console.log(error));
+}
+
+
+    function updateClock() {
+    var now = new Date();
+    var hours = now.getHours();
+    var minutes = now.getMinutes();
+    var seconds = now.getSeconds();
+
+    // Format the time values to add leading zeros if needed
+    hours = hours.toString().padStart(2, '0');
+    minutes = minutes.toString().padStart(2, '0');
+    seconds = seconds.toString().padStart(2, '0');
+
+    // Update the clock element with the formatted time
+    document.getElementById('clock').textContent = hours + ':' + minutes + ':' + seconds;
+    }
+
+    // Call the updateClock function every second
+    setInterval(updateClock, 1000);
+
+    function logout() {
+      window.location.href = 'loginPage.html';
+    }
+  
+    function settings() {
+        window.location.href = 'settings.html';
+    }
+
+    function openGlobalData(){
+        window.location.href = 'dataDisplay.html';
+    }
+</script>
