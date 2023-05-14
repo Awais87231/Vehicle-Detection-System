@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="signupcss.css">
+
+  <title>LOGIN PAGE</title>
+</head>
+
+<body>
+  <div class="blur"></div>
+  <div class="login-page">
+          <div class="form">
+            <form class="register-form">
+              <input type="text"  placeholder="name"/>
+              <input type="password"  placeholder="password"/>
+              <input type="text" placeholder="email address"/>
+              <button>create</button>
+              <!-- <p class="message">Already registered? <a href="#">Sign In</a></p> -->
+            </form>
+            <form class="login-form">
+              <input type="text" id="nameHolder" placeholder="ENTER YOUR USERNAME"/>
+              <input type="text"  placeholder="ENTER YOUR EMAIL ADDRESS"/>
+              <input type="password" id="passHolder" placeholder="ENTER YOUR PASSWORD"/>
+              <input type="password" id="confirm_passHolder" placeholder="CONFIRM YOUR PASSWORD"/>
+              <button type="button" onclick="writeToFile()">SIGNUP</button>
+              <p class="message">Got an account?  <a href="loginPage.html" style="text-decoration:none">Sign in instead!</a></p>
+            </form>
+          </div>
+        </div>
+</body>
+
+<script>
+  function writeToFile(){
+    const name = document.getElementById("nameHolder").value;
+    const password = document.getElementById("passHolder").value;
+    const confirm_password = document.getElementById("confirm_passHolder").value;
+    if(password !== confirm_password){
+      alert("Passwords do not match!");
+      return;
+    }
+    const userDataArray = {
+      name: name, password: password
+    }
+    fetch('/saveUserData', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(userDataArray)
+  })
+    .then(response => response.text())
+    .then(data => {
+      console.log(data); // Response from the server
+      // Handle the response as needed
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      // Handle the error
+    });
+    alert("Signed up successfully!");
+  }
+</script>
