@@ -1,0 +1,77 @@
+.headerTitle {
+    position: absolute;
+    width: 648px;
+    height: 75px;
+    left: 335px;
+    top: 130px;
+    
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 44px;
+    text-align: center;
+    
+    color: #506f86;
+}
+
+.loginBox img{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 453px;
+    height: 261px;
+    left: 411px;
+    top: 222px;
+
+    background: #5f6769;
+    border: 1px solid #000000;
+}
+
+.loginBox h2{
+    position: absolute;
+    width: 326px;
+    height: 24px;
+    left: 550px;
+    top: 235px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+
+    color: #000000;
+}
+
+.loginBox .loginForm{
+    position: absolute;
+    width: 144px;
+    height: 19px;
+    left: 555px;
+    top: 300px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+
+    color: #000000;
+}
+
+body{
+    background-color: #dfcdc3;
+}
+
+.submitButton{
+    box-sizing: border-box;
+    position: absolute;
+    width: 82px;
+    height: 19px;
+    left: 170px;
+    top: 70px;
+
+    background: #BA3C5A;
+    border: 1px solid #000000;
+}

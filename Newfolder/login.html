@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, inital-scale=1.0">
+    <link rel="stylesheet" href="login.css">
+    <!-- <style type="text/css" media="screen"></style> -->
+    <title class="titleClass">Grocerify</title>
+</head>
+
+<body>
+    
+
+<div class="headerTitle">
+    <p>VEHICLE DETECTION SYSTEM</p>
+</div>
+
+<div class="loginBox">
+    <a href="#"><img src="C:\Users\Ashar\Documents\NUCES\Study\SEM-2\ISE\PROJECT\Newfolder\assets\loginRect.png" alt="loginRect" /></a>
+    <h2>Login with your TMS credentials <br>
+        ‎ ‎ ‎ (Traffic Moderation System)</h2>
+        <div class="loginForm">
+            <form class="login-form">
+                <input type="text" id="usernameField" placeholder="ENTER YOUR USERNAME"/>
+                <input type="password" id="passwordField" placeholder="ENTER YOUR PASSWORD"/>
+                <button class="submitButton" id="loginButton"><a href = "login.html"> LOGIN! </a></button>
+              </form>
+        </div>
+</div>
+
+<script>
+    document.getElementById("loginButton").addEventListener("click", function(event){
+        event.preventDefault(); //preventing auto continue
+        const username = document.getElementById("usernameField").value;
+        const password = document.getElementById("passwordField").value;
+        if(username === "admin" && password === "admin"){
+            runMyScript();
+        }
+        else{
+            alert("Invalid credentials");
+        }
+    });
+
+    function runMyScript(){
+        fetch('http://localhost:5000/run-openCV')
+            .then(response => {
+                console.log('script executed successfully.');
+            })
+            .catch(error => {
+                console.error('error', error);
+            });
+    }
+</script>
